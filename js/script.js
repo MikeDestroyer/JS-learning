@@ -66,17 +66,13 @@ function getRollbackMessage() {
         return 'Что то пошло не так';
     }
 }
-asking();
 
+asking();
 title = getTitle();
 screens = screens.split(', ');
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrices = getServicePercentPrices();
-
-
-
-
 
 
 console.log('Название проекта:', title);
