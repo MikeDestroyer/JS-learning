@@ -9,7 +9,7 @@ function isNumber(num) {
 
 function asking() {
     title = prompt('Название проекта');
-    // screens = prompt('Название проекта');
+    screens = prompt('Какие типы экранов нужно разработать');
     do {
         screenPrice = +prompt('Сколько будет стоить данная работа?');
     } while (!isNumber(screenPrice));
@@ -17,24 +17,27 @@ function asking() {
 }
 
 const getAllServicePrices = function () {
-    let sum = 0;
+    let count = 0;
 
     for (let i = 0; i < 2; i++) {
+        let num = 0;
+
         if (i === 0) {
-            do {
-                service1 = prompt('Какой первый дополнительный тип услуги нужен?');
 
-            } while (!isNumber(service1));
+            service1 = prompt('Какой первый дополнительный тип услуги нужен?');
+
         } else {
-            do {
-                service2 = prompt('Какой второй дополнительный тип услуги нужен?');
-
-            } while (!isNumber(service2));
+            service2 = prompt('Какой второй дополнительный тип услуги нужен?');
         }
 
-        sum += +prompt('Сколько это будет стоить?');
+        do {
+            num = prompt('Сколько это будет стоить?');
+            console.log(num);
+        } while (!isNumber(num));
+
+        count += +num;
     }
-    return sum;
+    return count;
 };
 
 function getTitle() {
