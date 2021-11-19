@@ -10,10 +10,15 @@ function isNumber(num) {
 function asking() {
     title = prompt('Название проекта');
     screens = prompt('Какие типы экранов нужно разработать');
+
+    let num;
     do {
-        screenPrice = +prompt('Сколько будет стоить данная работа?');
-    } while (!isNumber(screenPrice));
-    // adaptive = confirm('Нужен ли адаптив на сайте?');
+        num = prompt('Сколько будет стоить данная работа?');
+        console.log(typeof (num), num);
+    } while (!isNumber(num));
+    screenPrice = +num;
+
+    adaptive = confirm('Нужен ли адаптив на сайте?');
 }
 
 const getAllServicePrices = function () {
@@ -23,9 +28,7 @@ const getAllServicePrices = function () {
         let num = 0;
 
         if (i === 0) {
-
             service1 = prompt('Какой первый дополнительный тип услуги нужен?');
-
         } else {
             service2 = prompt('Какой второй дополнительный тип услуги нужен?');
         }
@@ -63,14 +66,18 @@ function getRollbackMessage() {
         return 'Что то пошло не так';
     }
 }
-
-
 asking();
+
 title = getTitle();
 screens = screens.split(', ');
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrices = getServicePercentPrices();
+
+
+
+
+
 
 console.log('Название проекта:', title);
 console.log('Типы экранов:', typeof (screens), screens);
