@@ -1,29 +1,54 @@
 'use strict';
 
 const rollback = 3200;
+let title, screens, adaptive, screenPrice, allServicePrices, servicePercentPrices, fullPrice, service2, service1;
 
-let title = prompt('Название проекта');
-let screens = prompt('Какие типы экранов нужно разработать');
-let screenPrice = +prompt('Сколько будет стоить данная работа?');
-// let adaptive = confirm('Нужен ли адаптив на сайте?');
-// let service1 = prompt('Какой первый дополнительный тип услуги нужен?');
-let servicePrice1 = +prompt('Сколько это будет стоить?');
-// let service2 = prompt('Какой второй дополнительный тип услуги нужен?');
-let servicePrice2 = +prompt('Сколько это будет стоить?');
-let allServicePrices, servicePercentPrices, fullPrice;
+function isNumber(num) {
+    return !isNaN(parseFloat(num)) && isFinite(num);
+}
+
+function asking() {
+    title = prompt('Название проекта');
+    // screens = prompt('Название проекта');
+    do {
+        screenPrice = +prompt('Сколько будет стоить данная работа?');
+    } while (!isNumber(screenPrice));
+    // adaptive = confirm('Нужен ли адаптив на сайте?');
+}
 
 const getAllServicePrices = function () {
-    return servicePrice1 + servicePrice2;
+    let sum = 0;
+
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            do {
+                service1 = prompt('Какой первый дополнительный тип услуги нужен?');
+
+            } while (!isNumber(service1));
+        } else {
+            do {
+                service2 = prompt('Какой второй дополнительный тип услуги нужен?');
+
+            } while (!isNumber(service2));
+        }
+
+        sum += +prompt('Сколько это будет стоить?');
+    }
+    return sum;
 };
+
 function getTitle() {
     return title.trim().charAt(0).toUpperCase() + title.trim().toLowerCase().slice(1);
 }
+
 function getFullPrice() {
     return screenPrice + allServicePrices;
 }
+
 function getServicePercentPrices() {
     return fullPrice - rollback;
 }
+
 function getRollbackMessage() {
     if (servicePercentPrices > 30000) {
         return 'Скидка 10%';
@@ -36,6 +61,8 @@ function getRollbackMessage() {
     }
 }
 
+
+asking();
 title = getTitle();
 screens = screens.split(', ');
 allServicePrices = getAllServicePrices();
