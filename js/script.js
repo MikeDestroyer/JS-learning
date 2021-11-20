@@ -45,7 +45,7 @@ function GuessTheNumberGame() {
     }
 
 
-    if (nubmerComparsion(userNum, rand) === true) {
+    if (nubmerComparsion(userNum, rand)) {
         return 'Поздравляю, сегодня твой счастливый день! Собирай вещички и езжай прямиком в Вегас!';
     } else {
         restart = confirm('Хотите сыграть ещё раз?');
