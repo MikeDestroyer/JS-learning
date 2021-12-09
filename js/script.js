@@ -58,8 +58,8 @@ const appData = {
         return !isNaN(parseFloat(num)) && isFinite(num);
     },
     getPrice: function () {
-        appData.allServicePrices = appData.screens.reduce(function (sum, appData) {
-            return sum + appData.screens.price;
+        appData.allServicePrices = appData.screens.reduce(function (sum, elem) {
+            return sum + +elem.price;
         }, 0);
         for (let key in appData.services) {
             appData.allServicePrices += appData.services[key];
