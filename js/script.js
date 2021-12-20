@@ -22,10 +22,11 @@ btn.addEventListener('click', function () {
 range.addEventListener('input', function () {
     circle.style.width = range.value + '%';
     circle.style.height = range.value + '%';
-    span.value = range.value;
+    // span.value = range.value;
     console.log(circle.style.width);
 });
 
 
 // console.log(btn);
 // console.dir(btn);
+console.log();
