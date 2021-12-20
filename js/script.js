@@ -1,41 +1,31 @@
 'use strict';
 
-const title = getElementByTagFromArray('h1', 0);
-const reset = getElementByClassFromArray('handler_btn', 0);
-const start = getElementByClassFromArray('handler_btn', 1);
-const addScreen = document.querySelector('.screen-btn');
-const otherItems1 = document.querySelectorAll('.other-items', '.number');
-const otherItems2 = document.querySelectorAll('.other-items', '.percent');
-const rollback = document.querySelector('.rollback > div > input');
-const span = document.querySelector('.rollback > div > .range-value');
+const btn = document.getElementById('btn');
+const span = document.getElementById('span');
+const text = document.getElementById('text');
+const range = document.getElementById('range');
+const square = document.getElementById('square');
+const circle = document.getElementById('circle');
+
+let textValue, rangeValue;
 
 
-function getElementByTagFromArray(tagName, index) {
-    let tag = document.getElementsByTagName(tagName);
-    return tag[index];
-}
+text.addEventListener('change', function () {
+    textValue = text.value;
+    console.log(textValue);
+});
 
-function getElementByClassFromArray(className, index) {
-    let tag = document.getElementsByClassName(className);
-    return tag[index];
-}
+btn.addEventListener('click', function () {
+    square.style.backgroundColor = textValue;
+});
 
-function getVarsFromClass(ClassName, varName) {
-    let lenght = document.getElementsByClassName(ClassName).length;
-    // console.log(lenght);
-    for (let i = 0; i < lenght; i++) {
-        let(varName + i) = ;
-    }
+range.addEventListener('input', function () {
+    circle.style.width = range.value + '%';
+    circle.style.height = range.value + '%';
+    span.value = range.value;
+    console.log(circle.style.width);
+});
 
-}
-getVarsFromClass('total-input');
-console.log(rollback);
-console.log(span);
-// // rollback = rollback.getAttribute()
-// console.log(title);
-// console.log(start);
-// console.log(reset);
-// console.log(addScreen);
-// console.log(otherItems1);
-// console.log(otherItems2);
-// console.log(rollback);
+
+// console.log(btn);
+// console.dir(btn);
