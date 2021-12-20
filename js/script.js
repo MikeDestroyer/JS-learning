@@ -1,41 +1,135 @@
 'use strict';
 
-const title = getElementByTagFromArray('h1', 0);
-const reset = getElementByClassFromArray('handler_btn', 0);
-const start = getElementByClassFromArray('handler_btn', 1);
-const addScreen = document.querySelector('.screen-btn');
-const otherItems1 = document.querySelectorAll('.other-items', '.number');
-const otherItems2 = document.querySelectorAll('.other-items', '.percent');
-const rollback = document.querySelector('.rollback > div > input');
-const span = document.querySelector('.rollback > div > .range-value');
+const appData = {
+    btnStart: document.getElementById('start'),
+    btnPlus: document.querySelector('.screen-btn'),
+    screen: document.querySelectorAll('.screen'),
+    otherItemsNumber: document.querySelectorAll('.other-items.number'),
+    otherItemsPercent: document.querySelectorAll('.other-items.percent'),
+    totalInputs: document.querySelectorAll('.total-input'),
 
 
-function getElementByTagFromArray(tagName, index) {
-    let tag = document.getElementsByTagName(tagName);
-    return tag[index];
-}
+    title: '',
+    screens: [],
+    adaptive: true,
+    screenPrice: 0,
+    rollback: 3200,
+    servicePricesPercent: 0,
+    servicePricesNumber: 0,
+    servicePercentPrices: 0,
+    fullPrice: 0,
+    servicesPercent: {},
+    servicesNumber: {},
 
-function getElementByClassFromArray(className, index) {
-    let tag = document.getElementsByClassName(className);
-    return tag[index];
-}
+    init: function () {
+        appData.addTitle();
+        appData.btnStart.addEventListener('click', appData.start);
+        appData.btnPlus.addEventListener('click', appData.addScreenBlock);
+    },
 
-function getVarsFromClass(ClassName, varName) {
-    let lenght = document.getElementsByClassName(ClassName).length;
-    // console.log(lenght);
-    for (let i = 0; i < lenght; i++) {
-        let(varName + i) = ;
+    addTitle: function () {
+        appData.title = document.getElementById('title');
+        document.title = appData.title.textContent;
+    },
+
+    start: function () {
+        console.log('start');
+        appData.addScreens();
+        appData.addServices();
+        appData.getPrice();
+        appData.showResult();
+    },
+
+    addScreens: function () {
+        appData.screen = document.querySelectorAll('.screen');
+        appData.screens = [];
+        appData.screen.forEach(function (screen, index) {
+            const select = screen.querySelector('select');
+            const input = screen.querySelector('input');
+            const name = select.options[select.selectedIndex].textContent;
+
+            appData.screens.push({
+                id: index,
+                name: name,
+                price: +select.value * +input.value
+            });
+        });
+    },
+
+    addScreenBlock: function () {
+        const cloneScreen = appData.screen[0].cloneNode(true);
+        appData.screen[appData.screen.length - 1].after(cloneScreen);
+    },
+
+    addServices: function () {
+        appData.servicesPercent = [];
+        appData.servicesNumber = [];
+        appData.otherItemsPercent.forEach(function (item) {
+            const check = item.querySelector('input[type=checkbox]');
+            const label = item.querySelector('label');
+            const input = item.querySelector('input[type=text]');
+
+            if (check.checked) {
+                appData.servicesPercent[label.textContent] = +input.value;
+            }
+        });
+        console.log(appData.servicesPercent);
+
+        appData.otherItemsNumber.forEach(function (item) {
+            const check = item.querySelector('input[type=checkbox]');
+            const label = item.querySelector('label');
+            const input = item.querySelector('input[type=text]');
+
+            if (check.checked) {
+                appData.servicesNumber[label.textContent] = +input.value;
+            }
+        });
+        console.log(appData.servicesNumber);
+
+    },
+
+    getPrice: function () {
+        appData.screenPrice = 0;
+        appData.servicePricesNumber = 0;
+        appData.servicePricesPercent = 0
+        appData.fullPrice = 0;
+
+        for (let key in appData.screens) {
+            appData.screenPrice += appData.screens[key].price;
+        }
+        for (let key in appData.servicesNumber) {
+            appData.servicePricesNumber += appData.servicesNumber[key];
+        }
+        for (let key in appData.servicesPercent) {
+            appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
+        }
+
+        appData.fullPrice = appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
+        console.log(appData.fullPrice);
+    },
+    showResult: function () {
+        console.log(appData.totalInputs);
+        appData.totalInputs[0] = appData.screenPrice;
+        // appData.totalInputs[1] = appData.screenPrice;
+        appData.totalInputs[2] = appData.servicePricesNumber + appData.servicePricesPercent;
+        appData.totalInputs[3] = appData.fullPrice;
+        // appData.totalInputs[3] = appData.fullPrice;
+
+
     }
 
-}
-getVarsFromClass('total-input');
-console.log(rollback);
-console.log(span);
-// // rollback = rollback.getAttribute()
-// console.log(title);
-// console.log(start);
-// console.log(reset);
-// console.log(addScreen);
-// console.log(otherItems1);
-// console.log(otherItems2);
-// console.log(rollback);
+};
+
+appData.init();
+
+
+
+
+
+
+
+
+
+
+
+
