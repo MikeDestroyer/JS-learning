@@ -91,7 +91,7 @@ const appData = {
     getPrice: function () {
         appData.screenPrice = 0;
         appData.servicePricesNumber = 0;
-        appData.servicePricesPercent = 0
+        appData.servicePricesPercent = 0;
         appData.fullPrice = 0;
 
         for (let key in appData.screens) {
@@ -109,11 +109,11 @@ const appData = {
     },
     showResult: function () {
         console.log(appData.totalInputs);
-        appData.totalInputs[0] = appData.screenPrice;
-        // appData.totalInputs[1] = appData.screenPrice;
-        appData.totalInputs[2] = appData.servicePricesNumber + appData.servicePricesPercent;
-        appData.totalInputs[3] = appData.fullPrice;
-        // appData.totalInputs[3] = appData.fullPrice;
+        appData.totalInputs[0].value = appData.screenPrice;
+        // appData.totalInputs[1].value = appData.screenPrice;
+        appData.totalInputs[2].value = appData.servicePricesNumber + appData.servicePricesPercent;
+        appData.totalInputs[3].value = appData.fullPrice;
+        // appData.totalInputs[3].value = appData.fullPrice;
 
 
     }
