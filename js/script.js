@@ -51,6 +51,7 @@ const appData = {
             appData.screens.push({
                 id: index,
                 name: name,
+                number: +input.value,
                 price: +select.value * +input.value
             });
         });
@@ -105,18 +106,25 @@ const appData = {
         }
 
         appData.fullPrice = appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
-        console.log(appData.fullPrice);
     },
     showResult: function () {
-        console.log(appData.totalInputs);
+        let getScreenNumber = function () {
+            let result = 0;
+            appData.screens.forEach(function (item) {
+                result += item.number;
+            });
+            console.log('screens ', appData.screens);
+            console.log('sum ', result);
+            return result;
+        };
         appData.totalInputs[0].value = appData.screenPrice;
-        // appData.totalInputs[1].value = appData.screenPrice;
+        appData.totalInputs[1].value = getScreenNumber();
+        console.log(appData.totalInputs[1].value);
         appData.totalInputs[2].value = appData.servicePricesNumber + appData.servicePricesPercent;
         appData.totalInputs[3].value = appData.fullPrice;
-        // appData.totalInputs[3].value = appData.fullPrice;
-
-
+        console.log(appData.screens[0].number);
     }
+
 
 };
 
