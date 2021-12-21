@@ -30,7 +30,7 @@ const appData = {
         appData.btnPlus.addEventListener('click', appData.addScreenBlock);
         appData.rangeRollback.addEventListener('input', appData.rangeInput);
         // appData.startDisable();
-        appData.btnStart.disabled = true;
+        // appData.btnStart.disabled = true;
 
     },
 
