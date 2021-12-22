@@ -14,6 +14,7 @@ const appData = {
     title: '',
     screens: [],
     adaptive: true,
+    isError: Boolean,
     screenPrice: 0,
     rollback: 0,
     rollbackPercent: 0,
@@ -26,11 +27,9 @@ const appData = {
 
     init: function () {
         appData.addTitle();
-        appData.btnStart.addEventListener('click', appData.start);
+        appData.btnStart.addEventListener('click', appData.checkInputs);
         appData.btnPlus.addEventListener('click', appData.addScreenBlock);
         appData.rangeRollback.addEventListener('input', appData.rangeInput);
-        // appData.startDisable();
-        // appData.btnStart.disabled = true;
 
     },
 
@@ -39,34 +38,40 @@ const appData = {
         document.title = appData.title.textContent;
     },
     rangeInput: function () {
-        console.log(appData.rangeValue.value);
+        // console.log(appData.rangeValue.value);
         appData.rollbackPercent = +appData.rangeRollback.value;
         appData.rangeValue.textContent = appData.rangeRollback.value + '%';
     },
 
-    // startDisable: function () {
-    //     appData.screen.forEach(function (screen, index) {
-    //         const select = screen.querySelector('select');
-    //         let input = screen.querySelector('input');
-    //         input.addEventListener('input', function () {
-    //             console.log(input.value);
-    //             // input.forEach(function () {
-    //             //     if (input.value !== '') {
-    //             //         appData.btnStart.disabled = true;
-    //             //         console.log('unlocked', input.value == '');
-    //             //         console.log(input.value);
-    //             //     } else {
-    //             //         console.log('locked');
-    //             //         appData.btnStart.disabled = false;
-    //             //     }
-    //             // });
-    //         });
+    checkInputs: function () {
+        const screen = document.querySelectorAll('.screen');
+        appData.isError = true;
+        // console.dir(screen);
+        screen.forEach(function (input) {
+            const val = input.querySelector('div > input');
+            const valIndex = input.querySelector('div > select');
+            // console.log(valIndex.selectedIndex);
+            // console.log(val.value);
+            // console.log('val', val.value.trim() == '');
+            // console.log('valIndex', valIndex.selectedIndex == 0);
+            if (!(val.value.trim() !== '' && valIndex.selectedIndex !== 0)) {
+                appData.isError = true;
+            } else {
+                appData.isError = false;
+            }
+        });
+        if (appData.isError) {
+            alert('Заполните параметры экрана');
+        } else {
+            appData.start();
 
-    //     });
-    // },
+        }
+
+
+    },
 
     start: function () {
-        console.log('start');
+        // console.log('start');
         appData.addScreens();
         appData.addServices();
         appData.getPrice();
@@ -91,7 +96,6 @@ const appData = {
     },
 
     addScreenBlock: function () {
-        console.log('testsets');
         const cloneScreen = appData.screen[0].cloneNode(true);
         appData.screen[appData.screen.length - 1].after(cloneScreen);
     },
@@ -108,7 +112,7 @@ const appData = {
                 appData.servicesPercent[label.textContent] = +input.value;
             }
         });
-        console.log(appData.servicesPercent);
+        // console.log(appData.servicesPercent);
 
         appData.otherItemsNumber.forEach(function (item) {
             const check = item.querySelector('input[type=checkbox]');
@@ -119,7 +123,7 @@ const appData = {
                 appData.servicesNumber[label.textContent] = +input.value;
             }
         });
-        console.log(appData.servicesNumber);
+        // console.log(appData.servicesNumber);
 
     },
 
@@ -149,8 +153,8 @@ const appData = {
             appData.screens.forEach(function (item) {
                 result += item.number;
             });
-            console.log('screens ', appData.screens);
-            console.log('sum ', result);
+            // console.log('screens ', appData.screens);
+            // console.log('sum ', result);
             return result;
         };
 
