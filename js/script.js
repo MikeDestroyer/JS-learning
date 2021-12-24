@@ -28,7 +28,6 @@ toDoControl.addEventListener('submit', function (event) {
 })
 
 const render = function () {
-    console.log(toDoData);
     localStorage.removeItem(toDoData)
     toDoList.innerHTML = ''
     toDoCompeted.innerHTML = ''
@@ -49,7 +48,6 @@ const render = function () {
         }
         li.querySelector('.todo-remove').addEventListener('click', function () {
             li.remove()
-            console.log(item)
             toDoData.splice(index, 1)
             render()
         })
