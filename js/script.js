@@ -2,6 +2,7 @@
 
 const appData = {
     btnStart: document.getElementById('start'),
+    btnReset: document.getElementById('reset'),
     btnPlus: document.querySelector('.screen-btn'),
     screen: document.querySelectorAll('.screen'),
     otherItemsNumber: document.querySelectorAll('.other-items.number'),
@@ -161,10 +162,29 @@ const appData = {
     },
 
     showBtnReset: function () {
-        let btnReset = this.btnStart.cloneNode()
-        btnReset = ''
-    }
+        this.btnStart.style.display = 'none'
+        this.btnReset.style.display = 'block'
+        this.btnReset.addEventListener('click', this.reset.bind(this))
+    },
 
+    reset: function () {
+        this.clearScreenBlock()
+    },
+
+    clearScreenBlock: function () {
+        // appData.screen[0].childNodes[1].childNodes[1].options = 1
+        let firstScreenOption = document.querySelector('select[name=views-select]')
+        let firstScreenValue = document.querySelector('input[type=text]')
+        firstScreenOption.selectedIndex = 0
+        firstScreenValue.value = ''
+        this.screen.forEach((key, index) => {
+            if (index !== 0) {
+                delete this.screen[index]
+                // console.log(this.screen[index]);
+            }
+        })
+        console.log(this.screen);
+    }
 }
 
 appData.init()
