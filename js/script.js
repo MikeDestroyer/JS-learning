@@ -25,6 +25,7 @@ const appData = {
     fullPrice: 0,
     servicesPercent: {},
     servicesNumber: {},
+    clearScreen: document.querySelectorAll('.screen'),
 
     init: function () {
         this.addTitle()
@@ -173,18 +174,23 @@ const appData = {
 
     clearScreenBlock: function () {
         // appData.screen[0].childNodes[1].childNodes[1].options = 1
-        let firstScreenOption = document.querySelector('select[name=views-select]')
-        let firstScreenValue = document.querySelector('input[type=text]')
-        firstScreenOption.selectedIndex = 0
-        firstScreenValue.value = ''
-        this.screen.forEach((key, index) => {
-            if (index !== 0) {
-                delete this.screen[index]
-                // console.log(this.screen[index]);
-            }
-        })
-        console.log(this.screen);
+        // let firstScreenOption = document.querySelector('select[name=views-select]')
+        // let firstScreenValue = document.querySelector('input[type=text]')
+        // firstScreenOption.selectedIndex = 0
+        // firstScreenValue.value = ''
+        // this.screen.forEach((key, index) => {
+        //     if (index !== 0) {
+        //         delete this.screen[index]
+        //         // console.log(this.screen[index]);
+        //     }
+        // })
+        // this.screen = this.clearScreen
+        // console.log(this.screen)
+        console.log(appData.screen);
+        console.log(appData.clearScreen);
+
     }
 }
 
 appData.init()
+
