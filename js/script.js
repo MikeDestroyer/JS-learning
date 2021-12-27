@@ -10,6 +10,7 @@ const appData = {
     totalInputs: document.querySelectorAll('.total-input'),
     rangeRollback: document.querySelector('input[type=range]'),
     rangeValue: document.querySelector('.range-value'),
+    inputValues: document.querySelectorAll('.total-input, .custom-checkbox'),
 
 
     title: '',
@@ -41,7 +42,7 @@ const appData = {
     },
     rangeInput: function () {
         // console.log(appData.rangeValue.value)
-        console.log(this)
+        // console.log(this)
         this.rollbackPercent = +this.rangeRollback.value
         this.rangeValue.textContent = this.rangeRollback.value + '%'
     },
@@ -74,6 +75,7 @@ const appData = {
         this.addServices()
         this.getPrice()
         this.showResult()
+        this.blockInputs()
         this.showBtnReset()
     },
 
@@ -159,7 +161,23 @@ const appData = {
         this.totalInputs[1].value = getScreenNumber()
         this.totalInputs[2].value = this.servicePricesNumber + this.servicePricesPercent
         this.totalInputs[3].value = this.fullPrice
-        this.totalInputs[4].value = this.rollback
+        this.totalInputs[4].value = Math.trunc(this.rollback)
+    },
+
+    blockInputs: function () {
+        let select = document.querySelectorAll('select')
+        let inputs = document.querySelectorAll('input')
+
+        select.forEach((key) => {
+            key.setAttribute('disabled', "disabled")
+        })
+
+        inputs.forEach((key) => {
+            key.setAttribute('disabled', "disabled")
+            // console.log(key);
+        })
+
+        this.btnPlus.setAttribute('disabled', "disabled")
     },
 
     showBtnReset: function () {
@@ -170,26 +188,51 @@ const appData = {
 
     reset: function () {
         this.clearScreenBlock()
+        this.unblockInputs()
     },
 
     clearScreenBlock: function () {
-        // appData.screen[0].childNodes[1].childNodes[1].options = 1
-        // let firstScreenOption = document.querySelector('select[name=views-select]')
-        // let firstScreenValue = document.querySelector('input[type=text]')
-        // firstScreenOption.selectedIndex = 0
-        // firstScreenValue.value = ''
-        // this.screen.forEach((key, index) => {
-        //     if (index !== 0) {
-        //         delete this.screen[index]
-        //         // console.log(this.screen[index]);
-        //     }
-        // })
-        // this.screen = this.clearScreen
-        // console.log(this.screen)
-        console.log(appData.screen);
-        console.log(appData.clearScreen);
+        let firstScreenOption = document.querySelector('select[name=views-select]')
+        let firstInput = document.querySelector('input')
+        firstScreenOption.selectedIndex = 0
+        firstInput.value = ''
 
-    }
+        this.screen.forEach((key, index) => {
+            if (index !== 0) {
+                this.screen[index].remove()
+            }
+        })
+        this.inputValues.forEach((key, index) => {
+            key.value = ''
+            key.checked = false
+        })
+
+        this.rangeRollback.valueAsNumber = 0
+        this.rangeValue.textContent = '0%'
+        this.screen = this.clearScreen
+        this.btnStart.style.display = 'block'
+        this.btnReset.style.display = 'none'
+        // console.log(this.screen)
+        // console.log(inputValues);
+    },
+
+    unblockInputs: function () {
+        let select = document.querySelectorAll('select')
+        let inputs = document.querySelectorAll('input')
+
+        select.forEach((key) => {
+            key.removeAttribute('disabled')
+        })
+
+        inputs.forEach((key) => {
+            if (key.parentNode.parentNode.classList[1] == 'screen' ||
+                key.className == 'custom-checkbox' ||
+                key.parentNode.className == 'main-controls__range') {
+                key.removeAttribute('disabled')
+            }
+            this.btnPlus.removeAttribute('disabled')
+        })
+    },
 }
 
 appData.init()
