@@ -3,7 +3,7 @@
 const DomElement = function (selector, height, width, bg, fontSize, text) {
     let newElement
     console.log(selector);
-    this.element = () => {
+    const element = () => {
         console.log('start');
         if (selector.charAt(0) === '.') {
             console.log('true');
@@ -17,6 +17,7 @@ const DomElement = function (selector, height, width, bg, fontSize, text) {
             console.log('bullshit');
         }
     }
+    element()
     console.log(newElement);
     console.dir(newElement);
     newElement.style.height = height
