@@ -1,6 +1,6 @@
 'use strict'
 
-const DomElement = function (selector, height, width, bg, fontSize, text, element) {
+const DomElement = function (selector, height, width, bg, fontSize, text) {
     this.selector = selector
     this.height = height
     this.width = width
@@ -14,11 +14,9 @@ const DomElement = function (selector, height, width, bg, fontSize, text, elemen
 
 DomElement.prototype.displayElement = function () {
     if (selector.charAt(0) === '.') {
-        console.log('true');
         this.element = document.createElement('div')
         this.element.classList.add(selector.substring(1))
     } else if (selector.charAt(0) === '#') {
-        console.log('false');
         this.element = document.createElement('p')
         this.element.setAttribute('id', selector.substring(1));
     }
