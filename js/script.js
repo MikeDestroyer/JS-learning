@@ -7,9 +7,6 @@ const DomElement = function (selector, height, width, bg, fontSize, text) {
     this.bg = bg
     this.fontSize = fontSize
     this.text = text
-    console.log(selector);
-    console.log(height);
-
 }
 
 DomElement.prototype.displayElement = function () {
