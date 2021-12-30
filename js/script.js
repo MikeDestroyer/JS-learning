@@ -1,24 +1,30 @@
 'use strict'
 
 const DomElement = function (selector, height, width, bg, fontSize, text) {
-    let htmlElement
-    if (selector.charAt(0) === '.') {
-        htmlElement = document.createElement('div')
-        htmlElement.classList.add(selector.substring(1))
-    } else if (selector.charAt(0) === '#') {
-        htmlElement = document.createElement('p')
-        htmlElement.setAttribute('id', selector.substring(1));
-    } else {
-    }
-    htmlElement.style.height = height
-    htmlElement.style.width = width
-    htmlElement.style.background = bg
-    htmlElement.style.fontSize = fontSize
-    htmlElement.textContent = text
-    console.log(htmlElement);
-    this.exit = htmlElement
+    this.selector = selector
+    this.height = height
+    this.width = width
+    this.bg = bg
+    this.fontSize = fontSize
+    this.text = text
 }
 
+DomElement.prototype.displayElement = function () {
+    if (selector.charAt(0) === '.') {
+        this.element = document.createElement('div')
+        this.element.classList.add(selector.substring(1))
+    } else if (selector.charAt(0) === '#') {
+        this.element = document.createElement('p')
+        this.element.setAttribute('id', selector.substring(1));
+    }
+    this.element.style.height = this.height
+    this.element.style.width = this.width
+    this.element.style.background = this.bg
+    this.element.style.fontSize = this.fontSize
+    this.element.textContent = this.text
+    document.body.appendChild(this.element)
+}
+>>>>>>> 02cf8f9c60c739f4a7daef8d1c924d6b788eca6b
 
 // alert('Введите данные для создания элемента HTML')
 // const selector = prompt('введите id "#" или class "."')
@@ -28,14 +34,14 @@ const DomElement = function (selector, height, width, bg, fontSize, text) {
 // const fontSize = prompt('Введите параметр css "fontSize"')
 // const text = prompt('Введите текст для элемента')
 const selector = '.one'
-const height = '20px'
-const width = '40px'
+
+const height = '200px'
+const width = '400px'
 const bg = 'green'
 const fontSize = '16px'
 const text = 'hello world'
-const element = new DomElement(selector, height, width, bg, fontSize, text)
+const creacteElement = new DomElement(selector, height, width, bg, fontSize, text)
+console.log(creacteElement);
 
-console.log(element);
-document.body.appendChild(element.exit)
-// element.exit.append()
-console.log(document.body);
+creacteElement.displayElement()
+>>>>>>> 02cf8f9c60c739f4a7daef8d1c924d6b788eca6b
