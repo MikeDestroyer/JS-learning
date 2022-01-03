@@ -24,11 +24,12 @@ const timer = (deadline) => {
             timerHours.textContent = getTime.hours
             timerMinutes.textContent = getTime.minutes
             timerSeconds.textContent = getTime.seconds
-            setTimeout(clockUpdate, 1000)
+        } else {
+            clearInterval(timeCounter)
         }
     }
 
-    clockUpdate()
+    const timeCounter = setInterval(clockUpdate, 1000, deadline)
 
 }
 
