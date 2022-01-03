@@ -1,5 +1,6 @@
 'use strict'
-import Second from './modules/test.js'
 
-const log = new Second()
-console.log(log);
+import timer from './modules/timer.js'
+
+
+timer('2022 january 04')
