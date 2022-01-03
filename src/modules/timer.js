@@ -29,6 +29,7 @@ const timer = (deadline) => {
         }
     }
 
+    clockUpdate()
     const timeCounter = setInterval(clockUpdate, 1000, deadline)
 
 }
