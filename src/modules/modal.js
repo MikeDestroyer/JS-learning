@@ -4,13 +4,10 @@ const modal = () => {
     const popupWindow = document.querySelector('.popup-content')
     const buttons = document.querySelectorAll('.popup-btn')
     const btnPopupClose = document.querySelector('.popup-close')
+
     let screenWidth
     let opacity = 0
     let posY = -5
-
-
-
-
 
     const animationPopupOpen = () => {
         screenWidth = document.documentElement.clientWidth
@@ -50,15 +47,11 @@ const modal = () => {
         }
     }
 
-
     buttons.forEach((button) => {
         button.addEventListener('click', animationPopupOpen)
     })
 
     btnPopupClose.addEventListener('click', animationPopupClose)
-
-
-
 }
 
 export default modal
