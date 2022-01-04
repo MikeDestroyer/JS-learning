@@ -9,7 +9,7 @@ const timer = (deadline) => {
         let dateStop = new Date(deadline).getTime()
         let dateNow = new Date().getTime()
         let timeLeft = (dateStop - dateNow) / 1000
-        let hours = ('0' + Math.floor(timeLeft / 1200)).slice(-2)
+        let hours = ('0' + Math.floor(timeLeft / 60 / 60)).slice(-2)
         let minutes = ('0' + Math.floor((timeLeft / 60) % 60)).slice(-2)
         let seconds = ('0' + Math.floor(timeLeft % 60)).slice(-2)
         return {
