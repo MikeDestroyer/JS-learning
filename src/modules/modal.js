@@ -11,7 +11,7 @@ const modal = () => {
 
     const animationPopupOpen = () => {
         screenWidth = document.documentElement.clientWidth
-        console.log(screenWidth);
+        // console.log(screenWidth);
         if (screenWidth >= 768) {
             popup.style.display = 'block'
             opacity = opacity + 0.05
@@ -30,7 +30,7 @@ const modal = () => {
 
     const animationPopupClose = () => {
         screenWidth = document.documentElement.clientWidth
-        console.log(screenWidth);
+        // console.log(screenWidth);
         if (screenWidth >= 768) {
             opacity = opacity - 0.05
             posY = posY - 1
