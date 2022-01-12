@@ -3,10 +3,10 @@
 import timer from './modules/timer.js'
 import menu from './modules/menu.js'
 import modal from './modules/modal.js'
-import regExp from './modules/reg_exp.js'
+import checkForms from './modules/check-forms.js'
 
 
 timer('2022 january 30')
 menu()
 modal()
-regExp()
+checkForms()
