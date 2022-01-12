@@ -30,7 +30,6 @@ const modal = () => {
 
     const animationPopupClose = () => {
         screenWidth = document.documentElement.clientWidth
-        // console.log(screenWidth);
         if (screenWidth >= 768) {
             opacity = opacity - 0.05
             posY = posY - 1
@@ -46,6 +45,10 @@ const modal = () => {
             popup.style.display = 'none'
         }
     }
+
+    popup.addEventListener('click', (e) => {
+        e.target
+    })
 
     buttons.forEach((button) => {
         button.addEventListener('click', animationPopupOpen)
