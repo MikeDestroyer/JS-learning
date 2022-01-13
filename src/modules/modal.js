@@ -3,7 +3,6 @@ const modal = () => {
     const popup = document.querySelector('.popup')
     const popupWindow = document.querySelector('.popup-content')
     const buttons = document.querySelectorAll('.popup-btn')
-    const btnPopupClose = document.querySelector('.popup-close')
 
     let screenWidth
     let opacity = 0
@@ -11,7 +10,6 @@ const modal = () => {
 
     const animationPopupOpen = () => {
         screenWidth = document.documentElement.clientWidth
-        // console.log(screenWidth);
         if (screenWidth >= 768) {
             popup.style.display = 'block'
             opacity = opacity + 0.05
@@ -47,14 +45,14 @@ const modal = () => {
     }
 
     popup.addEventListener('click', (e) => {
-        e.target
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            animationPopupClose()
+        }
     })
 
     buttons.forEach((button) => {
         button.addEventListener('click', animationPopupOpen)
     })
-
-    btnPopupClose.addEventListener('click', animationPopupClose)
 }
 
 export default modal
