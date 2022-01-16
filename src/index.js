@@ -6,6 +6,7 @@ import modal from './modules/modal.js'
 import checkForms from './modules/check-forms.js'
 import tabs from './modules/tabs.js'
 import slider from './modules/slider.js'
+import calc from './modules/calc.js'
 
 
 
@@ -15,3 +16,4 @@ modal()
 checkForms()
 tabs()
 slider()
+calc(100)
