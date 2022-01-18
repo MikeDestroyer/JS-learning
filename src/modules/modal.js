@@ -1,44 +1,51 @@
 'use strict'
+import { animate, animateReverse } from './helpers.js'
+
 const modal = () => {
     const popup = document.querySelector('.popup')
     const popupWindow = document.querySelector('.popup-content')
     const buttons = document.querySelectorAll('.popup-btn')
 
     let screenWidth
-    let opacity = 0
-    let posY = -5
 
     const animationPopupOpen = () => {
+
         screenWidth = document.documentElement.clientWidth
         if (screenWidth >= 768) {
             popup.style.display = 'block'
-            opacity = opacity + 0.05
-            posY = posY + 1
-
-            popup.style.backgroundColor = `rgba(0,0,0,${opacity})`
-            popupWindow.style.transform = `translateY(${posY}%)`
-            if (opacity < 0.5) {
-                requestAnimationFrame(animationPopupOpen)
-            }
-        } else {
-            popup.style.backgroundColor = `rgba(0,0,0,.5)`
-            popup.style.display = 'block'
+            animate({
+                duration: 500,
+                timing(timeFraction) {
+                    return timeFraction;
+                },
+                draw(progress) {
+                    popup.style.backgroundColor = `rgba(0,0,0,${progress * 0.5})`
+                    popupWindow.style.opacity = progress * 1
+                    popupWindow.style.transform = `translateY(${progress * 20}%)`
+                }
+            })
         }
     }
+
 
     const animationPopupClose = () => {
         screenWidth = document.documentElement.clientWidth
         if (screenWidth >= 768) {
-            opacity = opacity - 0.05
-            posY = posY - 1
+            animateReverse({
+                duration: 500,
+                timing(timeFraction) {
+                    return timeFraction;
+                },
+                draw(progress) {
+                    popup.style.backgroundColor = `rgba(0,0,0,${progress * 0.5})`
+                    popupWindow.style.opacity = progress * 1
+                    popupWindow.style.transform = `translateY(${progress * 20}%)`
+                    if (popupWindow.style.opacity <= 0) {
+                        popup.style.display = 'none'
+                    }
+                }
+            })
 
-            popup.style.backgroundColor = `rgba(0,0,0,${opacity})`
-            popupWindow.style.transform = `translateY(${posY}%)`
-            if (opacity > 0) {
-                requestAnimationFrame(animationPopupClose)
-            } else {
-                popup.style.display = 'none'
-            }
         } else {
             popup.style.display = 'none'
         }
@@ -53,6 +60,7 @@ const modal = () => {
     buttons.forEach((button) => {
         button.addEventListener('click', animationPopupOpen)
     })
+
 }
 
 export default modal
