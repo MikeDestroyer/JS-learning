@@ -1,1 +1,28 @@
-(()=>{"use strict";(e=>{const t=document.getElementById("timer-hours"),o=document.getElementById("timer-minutes"),r=document.getElementById("timer-seconds"),c=()=>{let c=(()=>{let t=(new Date(e).getTime()-(new Date).getTime())/1e3;return{timeLeft:t,hours:("0"+Math.floor(t/60/60)).slice(-2),minutes:("0"+Math.floor(t/60%60)).slice(-2),seconds:("0"+Math.floor(t%60)).slice(-2)}})();c.timeLeft>0?(t.textContent=c.hours,o.textContent=c.minutes,r.textContent=c.seconds):clearInterval(a)};c();const a=setInterval(c,1e3,e)})("2022 january 30"),(()=>{const e=document.querySelector(".menu"),t=document.querySelector("menu"),o=()=>{t.classList.toggle("active-menu")};e.addEventListener("click",o),t.addEventListener("click",(e=>{"A"===e.target.tagName&&o()}))})(),(()=>{const e=document.querySelector(".popup"),t=document.querySelector(".popup-content"),o=document.querySelectorAll(".popup-btn");let r,c=0,a=-5;const n=()=>{r=document.documentElement.clientWidth,r>=768?(e.style.display="block",c+=.05,a+=1,e.style.backgroundColor=`rgba(0,0,0,${c})`,t.style.transform=`translateY(${a}%)`,c<.5&&requestAnimationFrame(n)):(e.style.backgroundColor="rgba(0,0,0,.5)",e.style.display="block")},l=()=>{r=document.documentElement.clientWidth,r>=768?(c-=.05,a-=1,e.style.backgroundColor=`rgba(0,0,0,${c})`,t.style.transform=`translateY(${a}%)`,c>0?requestAnimationFrame(l):e.style.display="none"):e.style.display="none"};e.addEventListener("click",(e=>{e.target.closest(".popup-content")&&!e.target.classList.contains("popup-close")||l()})),o.forEach((e=>{e.addEventListener("click",n)}))})(),(()=>{const e=document.querySelectorAll("form"),t=document.querySelectorAll("input.calc-item"),o=document.querySelector(".calc-type"),r=document.querySelector(".calc-square"),c=document.querySelector(".calc-count"),a=document.querySelector(".calc-day"),n=e=>{e.target.value=e.target.value.replace(/[^а-я ]/gi,"")},l=e=>{e.target.value=e.target.value.replace(/[^\w^@-_.!~*']/gi,"")},s=e=>{e.target.value=e.target.value.replace(/[^\d\(\)-]/g,"")},i=e=>{e.target.value=e.target.value.replace(/\D+/g,"")};e.forEach((e=>{const t=e.querySelector("input[type=text]"),o=e.querySelector("input[type=email]"),r=e.querySelector("input[type=tel]");t.addEventListener("input",n),o.addEventListener("input",l),r.addEventListener("input",s)})),t.forEach((e=>{e.addEventListener("input",i)})),o.addEventListener("input",(()=>{r.value="",c.value="",a.value=""}))})(),(()=>{const e=document.querySelector(".service-header"),t=document.querySelectorAll(".service-header-tab"),o=document.querySelectorAll(".service-tab");e.addEventListener("click",(e=>{e.target.closest(".service-header-tab")&&t.forEach(((t,r)=>{t===e.target.closest(".service-header-tab")?(t.classList.add("active"),o[r].classList.remove("d-none")):(t.classList.remove("active"),o[r].classList.add("d-none"))}))}))})(),(()=>{const e=document.querySelector(".portfolio-content"),t=document.querySelectorAll(".portfolio-item"),o=document.querySelector(".portfolio-dots");let r,c,a=0;const n=(e,t,o)=>{e[t].classList.remove(o)},l=(e,t,o)=>{e[t].classList.add(o)},s=()=>{n(t,a,"portfolio-item-active"),n(r,a,"dot-active"),a++,a>=t.length&&(a=0),l(t,a,"portfolio-item-active"),l(r,a,"dot-active")},i=(e=1500)=>{c=setInterval(s,e)};e.addEventListener("click",(e=>{e.preventDefault(),e.target.matches(".dot, .portfolio-btn")&&(n(t,a,"portfolio-item-active"),n(r,a,"dot-active"),e.target.matches("#arrow-left")?a--:e.target.matches("#arrow-right")?a++:e.target.classList.contains("dot")&&r.forEach(((t,o)=>{e.target===t&&(a=o)})),a>=t.length?a=0:a<0&&(a=t.length-1),l(t,a,"portfolio-item-active"),l(r,a,"dot-active"))})),e.addEventListener("mouseenter",(e=>{e.target.matches(".dot, .portfolio-btn")&&clearInterval(c)}),!0),e.addEventListener("mouseleave",(e=>{e.target.matches(".dot, .portfolio-btn")&&i(2e3)}),!0),t.forEach(((e,t)=>{const r=document.createElement("li");r.classList.add("dot"),0==t&&r.classList.add("dot-active"),o.append(r)})),r=document.querySelectorAll(".dot"),i(2e3)})()})();
+let user
+
+const getData = (path) => {
+    let userData
+    return fetch(path)
+        .then(response => response.json())
+        .then(data => {
+            userData = data
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+}
+
+// const sendData = () => {
+//     fetch ('https://jsonplaceholder.typicode.com/posts') {
+//         method: 'PUT',
+//         body:
+//     }
+
+
+// }
+user = getData('./database/db.json')
+console.log(user);
+
+
+
