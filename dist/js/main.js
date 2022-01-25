@@ -4,8 +4,8 @@ const getData = (path) => {
     fetch(path)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             sendData(data, 'https://jsonplaceholder.typicode.com/posts')
+            console.log(data);
         })
         .catch(error => {
             console.log(error);
@@ -13,11 +13,7 @@ const getData = (path) => {
 
 }
 
-
-
-
 const sendData = (data, url) => {
-    console.log(data.age, data.role, data.user);
     fetch(url, {
         method: 'POST',
         headers: {
