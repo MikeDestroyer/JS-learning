@@ -1,12 +1,10 @@
-'use strict'
+import { render } from "./modules/render";
+import { UserService } from "./modules/userService";
+import { addUsers } from "./modules/addUsers";
 
-import timer from './modules/timer.js'
-import menu from './modules/menu.js'
-import modal from './modules/modal.js'
-import checkForms from './modules/check-forms.js'
+window.userService = new UserService
 
-
-timer('2022 january 30')
-menu()
-modal()
-checkForms()
+userService.getUsers().then(data => {
+    render(data)
+})
+addUsers()

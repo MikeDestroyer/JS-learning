@@ -1,17 +1,19 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
-    context: path.resolve(__dirname, 'src'),
-    entry: './index.js',
+    entry: {
+        path: path.join(__dirname, './src')
+    },
     output: {
-        filename: './js/main.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.join(__dirname, './dist/js'),
+        filename: 'index.js',
     },
     devServer: {
         hot: true,
-        static: {
-            directory: './dist',
-            watch: true
+        open: true,
+        static:{
+            watch: true,
+            directory: './src'
         }
-    },
-};
+    }
+}
